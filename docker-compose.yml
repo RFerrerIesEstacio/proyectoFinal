@@ -1,0 +1,63 @@
+version: "3"  
+services:
+  proy_nginx:
+    container_name: "proy_nginx"
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      # - "443:443"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - proy_react
+      - proy_laravel
+
+  proy_react:
+    container_name: "proy_react"
+    image: node:18-alpine
+    volumes:
+      - ./frontend-react/:/home/node/app/
+      - ./config/startnode.sh:/startnode.sh:ro
+    working_dir: /home/node/app/
+    command: sh /startnode.sh
+    environment:
+      - FAST_REFRESH=false
+
+  proy_laravel:
+    container_name: "proy_laravel"
+    image: bitnami/laravel
+    volumes:
+      - ./backend--Laravel:/app/
+      - ./config/startlaravel.sh:/startlaravel.sh:ro
+    depends_on:
+      - proy_db
+    env_file:
+      - ./backend--Laravel/.env
+    command: sh /startlaravel.sh
+#    environment:
+#      - DB_HOST=proy_db
+#      - DB_PORT=3306
+#      - DB_USERNAME=proy_user
+#      - DB_DATABASE=proy
+    ports:
+      - '8000:8000'
+
+  proy_db:
+    container_name: "proy_db"
+    image: mariadb
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+      - MARIADB_USER=proy_user
+      - MARIADB_PASSWORD=proy_user
+      - MARIADB_DATABASE=proy
+
+  proy_dbadmin:
+    container_name: "proy_dbadmin"
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=proy_db
+      - PMA_PORT=3306 
+      - PMA_ARBITRARY=1
+      - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin/
+
