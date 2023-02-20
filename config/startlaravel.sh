@@ -1,6 +1,3 @@
 #!/bin/sh
 
-composer update
-php artisan migrate --seed
-php artisan serve --host=0.0.0.0 --port=8000
-
+composer update && php artisan migrate --seed && php artisan serve --host=0.0.0.0 --port=8000
