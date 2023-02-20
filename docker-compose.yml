@@ -25,6 +25,7 @@ services:
 
   proy_laravel:
     container_name: "proy_laravel"
+    working_dir: /app/
     image: bitnami/laravel
     volumes:
       - ./backend--Laravel:/app/
@@ -33,14 +34,11 @@ services:
       - proy_db
     env_file:
       - ./backend--Laravel/.env
-    command: sh /startlaravel.sh
-#    environment:
-#      - DB_HOST=proy_db
-#      - DB_PORT=3306
-#      - DB_USERNAME=proy_user
-#      - DB_DATABASE=proy
+    command: /bin/sh /startlaravel.sh
     ports:
       - '8000:8000'
+    depends_on:
+      - proy_db
 
   proy_db:
     container_name: "proy_db"
@@ -60,4 +58,7 @@ services:
       - PMA_PORT=3306 
       - PMA_ARBITRARY=1
       - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin/
+
+    depends_on:
+      - proy_db
 
