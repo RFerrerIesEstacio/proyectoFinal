@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material';
-import {useLocation} from 'react-router-dom'
 
 export default function NotFound() {
     return (

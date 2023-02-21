@@ -21,8 +21,13 @@ export default function useProductos(){
     }
 
     function removeItem(id){
-        return productos.destroyProducto(id).then((data) => {
-            getList(1);
+        return productos.destroyProducto(id).then((data) => {            
+            const filtros = {
+                search: '',
+                preciomin: 0,
+                preciomax: 1000
+            } 
+            getList(filtros, 1);
         }            
         ).catch((e) => {
             setProductErrors(e.errors ?? {});
@@ -35,7 +40,8 @@ export default function useProductos(){
             navigate('/newProducto');
         }
         else{
-            navigate('/newProducto', {state: listaProductos[id]});
+            const producto = listaProductos.filter( ($producto) => $producto.id === id);
+            navigate('/newProducto', {state: producto[0]});
         }
     }
 

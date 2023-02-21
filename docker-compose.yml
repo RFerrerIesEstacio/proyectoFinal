@@ -37,8 +37,7 @@ services:
     command: /bin/sh /startlaravel.sh
     ports:
       - '8000:8000'
-    depends_on:
-      - proy_db
+
 
   proy_db:
     container_name: "proy_db"

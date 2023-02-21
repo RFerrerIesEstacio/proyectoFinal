@@ -25,22 +25,22 @@ export default function useUser () {
     const logout = () => {
         setJWT(null);
         setLogged(false);
-        setUserData({});
+        setUserData('');
         navigate('/login');
     };
 
-    const fetchUserData = () => {
+    const   fetchUserData = () => {
         return usuario.getUser().then((data) => {
             setUserData(data);
-            console.log(data);
         }).catch((e) => console.log(e));
     }
 
     const register = (data) => {
         return auth.register(data).then(({token}) => {
-            fetchUserData();
             setLogged(true);
             setJWT(token);
+            setAuthBarer(token);
+            fetchUserData().then(() => navigate('/inicio/'));
         })
         .catch((e) => {
             setErrors(e.errors ?? {});

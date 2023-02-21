@@ -1,32 +1,20 @@
 import * as React from 'react';
-import  {Navigate, useNavigate}  from "react-router-dom";
 import { useEffect, useState } from "react";
-import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import {Pagination} from '@mui/material';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useUser from "../../hooks/useUser"
 import useProductos from "../../hooks/useProductos"
-import * as productos from "../../services/productos";
+
 
 
 
@@ -157,7 +145,7 @@ export default function Shop() {
         </Container>
             
         <Container sx={{ py: 8 }} maxWidth="lg" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-          <Grid container spacing={4}>
+          <Grid container spacing={4}>  
             {(listaProductos) && listaProductos.map((card) => (
               <Grid item key={card.id} xs={12} sm={6} md={3}>
                 <Card
@@ -192,8 +180,8 @@ export default function Shop() {
                     <Button size="small" disabled>Comprar</Button>
                     {( userData.rol === 'admin') && 
                       <>
-                        <Button size="small" onClick={() => editItem(card.id - 1)}>Edit</Button>
-                        <Button size="small" onClick={() => removeItem(card.id)}>Delete</Button>
+                        <Button size="small" onClick={() => editItem(card.id)}>Edit</Button>
+                        <Button size="small" onClick={() => removeItem(card.id) && setPage(1)}>Delete</Button>
                       </>
                     }
                     

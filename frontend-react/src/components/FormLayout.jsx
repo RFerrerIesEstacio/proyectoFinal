@@ -24,7 +24,7 @@ export default function FormLayout(){
                     <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1}}>
                         <Container component="main"  sx={{
                             backgroundColor: 'white', 
-                            padding: '5rem !important',
+                            padding: '3rem !important',
                             width: '600px',  
                             margin: 'auto',
                             borderRadius: '40px',

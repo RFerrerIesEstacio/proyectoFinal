@@ -1,18 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Checkbox from '@mui/material/Checkbox';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email';
 import { InputLabel, FormControl, FormHelperText } from '@mui/material';
 import useUser from '../hooks/useUser';
@@ -71,7 +67,7 @@ export default function Contacto() {
                 <Typography component="h1" variant="h5">
                     Contáctanos
                 </Typography>
-                <Box component="form" noValidate sx={{ mt: 3 }}>
+                <Box component="form" noValidate sx={{ mt: 1 }}>
                     <Grid container spacing={2}>
 
                         <Grid item xs={12}>
