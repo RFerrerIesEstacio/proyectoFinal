@@ -22,4 +22,5 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('user', [AuthController::class, 'user']);
 Route::apiResource('productos', ProductosController::class);
 Route::post('/productFilters', [ProductosController::class, 'productListFilter']);
+Route::get('/productImage/{id}', [ProductosController::class, 'image']);
 Route::post('/contact', [ConsultasController::class, 'store']);

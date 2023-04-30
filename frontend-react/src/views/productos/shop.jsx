@@ -62,88 +62,84 @@ export default function Shop() {
 
   },[min,max,search]);
   return (
-    
-      <>  
+      <> 
+        <Container  sx={{
+          bgcolor: 'white', 
+          width: '72rem', 
+          mt: '2rem', 
+          p: '1rem', 
+          borderRadius: '0.5%'
+          }}
+          >
+          <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
+            <Button variant="outlined" color='primary' onClick={() => editItem('')} style={{backgroundColor: 'white', margin: '1rem'}}>Añadir Producto</Button>
+          </div>
           
-          
-          <Container  sx={{
-            bgcolor: 'white', 
-            width: '72rem', 
-            mt: '2rem', 
-            p: '1rem', 
-            borderRadius: '0.5%'
-            }}
-            >
-            {( userData.rol === 'admin') && 
-              <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
-                <Button variant="outlined" color='primary' onClick={() => editItem('')} style={{backgroundColor: 'white', margin: '1rem'}}>Añadir Producto</Button>
-              </div>
-            }
+          <Typography
+            component="h1"
+            variant="h4"
+            align="center"
+            color="text.primary"
+            gutterBottom
+            mb={4}
+          >
+            Encuentra rápidamente lo que buscas
+          </Typography>
+          <Container
+            component="form"
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 , flexDirection: 'column'}}
+          >
+            <TextField
+              id="input-with-icon-textfield"
+              label="Buscar"
+              fullWidth
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{marginBottom: '2rem'}}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+            />
             <Typography
-              component="h1"
-              variant="h4"
-              align="center"
-              color="text.primary"
-              gutterBottom
-              mb={4}
-            >
-              Encuentra rápidamente lo que buscas
-            </Typography>
-            <Container
-              component="form"
-              sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 , flexDirection: 'column'}}
-            >
-              <TextField
-                id="input-with-icon-textfield"
-                label="Buscar"
-                fullWidth
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{marginBottom: '2rem'}}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="end">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                variant="outlined"
-              />
-              <Typography
-              component="h1"
-              variant="body1"
-              align="center"
-              color="text.primary"
-              gutterBottom
-              style={{alignSelf: 'flex-start'}}
-            >
-              Filtrar por precio
-            </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    name="preciomin"
-                    fullWidth
-                    id="preciomin"
-                    label="Precio Mínimo"
-                    value={min}
-                    onChange={(e) => setMin(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    id="preciomax"
-                    label="Precio Máximo"
-                    name="preciomax"
-                    value={max}
-                    onChange={(e) => setMax(e.target.value)}
-                  />
-                </Grid>
+            component="h1"
+            variant="body1"
+            align="center"
+            color="text.primary"
+            gutterBottom
+            style={{alignSelf: 'flex-start'}}
+          >
+            Filtrar por precio
+          </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="preciomin"
+                  fullWidth
+                  id="preciomin"
+                  label="Precio Mínimo"
+                  value={min}
+                  onChange={(e) => setMin(e.target.value)}
+                />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="preciomax"
+                  label="Precio Máximo"
+                  name="preciomax"
+                  value={max}
+                  onChange={(e) => setMax(e.target.value)}
+                />
+              </Grid>
+            </Grid>
           </Container>
         </Container>
-            
+
         <Container sx={{ py: 8 }} maxWidth="lg" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <Grid container spacing={4}>  
             {(listaProductos) && listaProductos.map((card) => (
@@ -156,7 +152,7 @@ export default function Shop() {
                     sx={{
                       pt: '20%',
                     }}
-                    image="/images/main.png"
+                    {...{image: card.image ? '/api/productImage/' + card.id : '/images/main.png'}}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
@@ -188,14 +184,10 @@ export default function Shop() {
                   </CardActions>
                 </Card>
               </Grid>
-
             ))}
-            
-            
-          </Grid>
-          <Pagination sx={{mt: 3}} count={length} onChange={pagination} page={page} style={{backgroundColor: 'white', padding: '1rem', borderRadius: '10px', border: '2px solid black' }} variant="outlined" shape="rounded"/>
-          
-        </Container>
+        </Grid>
+        <Pagination sx={{mt: 3}} count={length} onChange={pagination} page={page} style={{backgroundColor: 'white', padding: '1rem', borderRadius: '10px', border: '2px solid black' }} variant="outlined" shape="rounded"/>
+      </Container>
       </>
   );
 }

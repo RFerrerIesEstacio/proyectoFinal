@@ -16,8 +16,20 @@ import NewProducto from "./views/productos/newProducto";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <FormLayout/>,
+        element: <Layout/>,
         children: [
+            {
+                path: "/",
+                element: <Inicio/>
+            },
+            {
+                path: "/inicio",
+                element: <Inicio/>
+            },
+            {
+                path: "/tienda",
+                element: <IsNotAuth><Shop/></IsNotAuth>
+            },
             {
                 path: "/signup",
                 element: <IsAuth><SignUp/></IsAuth>
@@ -26,7 +38,6 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <IsAuth><LogIn/></IsAuth>
             },
-
             {
                 path: "/contacto",
                 element: <IsNotAuth><Contacto/></IsNotAuth>
@@ -38,25 +49,6 @@ const router = createBrowserRouter([
             {
                 path: "/user",
                 element: <IsNotAuth><Usuario/></IsNotAuth>
-            },
-
-        ]
-    },
-    {
-        path: "/",
-        element: <Layout/>,
-        children: [
-            {
-                path: "/",
-                element: <IsAuth><LogIn/></IsAuth>
-            },
-            {
-                path: "/inicio",
-                element: <Inicio/>
-            },
-            {
-                path: "/tienda",
-                element: <IsNotAuth><Shop/></IsNotAuth>
             },
             {
                 path: "*",
