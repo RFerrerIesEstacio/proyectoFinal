@@ -19,8 +19,10 @@ class RolAdmin
         if(auth()->user()->rol === 'admin'){
             return $next($request);
         }
+        $jose = auth()->user();
+        var_dump($request->route()->parameter('id'));
         return response()->json(['errors' => [
-            'Operación restringida. Este usuario no tiene el rol de administrador.'
+            'Operación restringida. Este usuario no es propietario del producto.'
         ]], 400);
     }
 }

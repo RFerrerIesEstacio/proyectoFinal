@@ -8,6 +8,7 @@ import * as usuario from "../services/usuario";
 export default function useUser() {
   //const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [userProfile, setUserProfile] = useState({});
   const { setJWT, isLogged, setLogged, userData, setUserData, setAuthBarer } = useContext(Context)
   const navigate = (a) => {};
   const login = (data) => {
@@ -47,6 +48,11 @@ export default function useUser() {
       })
   }
 
+  const getUserData = (id) => {
+    return usuario.getUserProfile(id).then((data) => {
+      setUserProfile(data);
+    }).catch((e) => console.log(e));
+  }
   return {
     logout,
     register,
@@ -56,6 +62,9 @@ export default function useUser() {
     isLogged,
     fetchUserData,
     userData,
-    setUserData
+    setUserData,
+    getUserData,
+    userProfile, 
+    setUserProfile
   }
 }

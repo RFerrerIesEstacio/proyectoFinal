@@ -65,11 +65,14 @@ export default function Shop() {
       <> 
         <Container  sx={{
           bgcolor: 'white', 
-          width: '72rem', 
+
           mt: '2rem', 
           p: '1rem', 
           borderRadius: '0.5%'
           }}
+          sm={{width: '25rem'}}
+          md={{width: '40rem'}}
+          lg={{width: '60rem'}}
           >
           <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
             <Button variant="outlined" color='primary' onClick={() => editItem('')} style={{backgroundColor: 'white', margin: '1rem'}}>Añadir Producto</Button>
@@ -86,8 +89,7 @@ export default function Shop() {
             Encuentra rápidamente lo que buscas
           </Typography>
           <Container
-            component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 , flexDirection: 'column'}}
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', flexDirection: 'column', width: '30rem'}}
           >
             <TextField
               id="input-with-icon-textfield"

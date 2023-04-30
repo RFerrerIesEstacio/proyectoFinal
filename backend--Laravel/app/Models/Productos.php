@@ -15,6 +15,12 @@ class Productos extends Model
         'precio',
         'stock',
         'image',
-        'categoria'
+        'categoria',
+        'comprador',
+        'id_usuario'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

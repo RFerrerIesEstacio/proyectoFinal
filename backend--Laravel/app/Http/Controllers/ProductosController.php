@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\RolAdmin;
 use App\Http\Requests\ProductosRequest;
 use App\Models\Productos;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -13,7 +14,6 @@ class ProductosController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api')->except(['image']);
-        $this->middleware(RolAdmin::class)->only(['store', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos = Productos::paginate(12);
+        $productos = Productos::paginate(12)->where('comprador', '=', 0);
         return response()->json($productos);
     }
 
@@ -33,22 +33,25 @@ class ProductosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProductosRequest $request) {
-        
+
         // Save the image to the /public/images directory using the Laravel storage disk
+        $UserId = auth()->user()->id;
         $producto = Productos::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'precio' => $request->precio,
             'stock' => $request->stock,
             'image' => $request->image ? true : false,
-            'categoria' => $request->categoria
+            'categoria' => $request->categoria,
+            'id_usuario' => $UserId,
+            'comprador' => 0
         ]);
 
         if ($request->image) {
             $imagePath = 'images/' . $producto->id . '.jpg';
             $image_parts = explode(";base64,", $request->image);
             $image_base64 = base64_decode($image_parts[1]);
-    
+
             file_put_contents($imagePath, $image_base64);
         }
 
@@ -75,6 +78,8 @@ class ProductosController extends Controller
      */
     public function update(ProductosRequest $request, $id)
     {
+
+        $this->checkAuth($id);
         $producto = Productos::findOrFail($id);
         $producto->nombre = $request->get('nombre');
         $producto->descripcion = $request->get('descripcion');
@@ -93,6 +98,7 @@ class ProductosController extends Controller
      */
     public function destroy($id)
     {
+        $this->checkAuth($id);
         $imgPath = 'images/' . $id . '.jpg';
         if (File::exists($imgPath)) {
             File::delete($imgPath);
@@ -111,12 +117,21 @@ class ProductosController extends Controller
         if (!File::exists($path)) {
             abort(404);
         }
-    
+
         $file = File::get($path);
         $type = File::mimeType($path);
         $response = response($file, 200);
         $response->header("Content-Type", $type);
         return $response;
-        
+
     }
+
+    public function checkAuth($pid) {
+        $product = Productos::find($pid);
+        $userId = $product->id_usuario;
+        if(!$userId === auth()->user()->id && auth()->user()->rol !== "admin"){
+            abort(400);
+        }
+    }
+
 }

@@ -22,12 +22,7 @@ export default function useProductos(){
 
     function removeItem(id){
         return productos.destroyProducto(id).then((data) => {            
-            const filtros = {
-                search: '',
-                preciomin: 0,
-                preciomax: 1000
-            } 
-            getList(filtros, 1);
+            location.reload();
         }            
         ).catch((e) => {
             setProductErrors(e.errors ?? {});
@@ -70,7 +65,7 @@ export default function useProductos(){
         })
         .catch((e) => setProductErrors(e.errors ?? {}));
     }
-
+    
     return {
         getList,
         listaProductos,

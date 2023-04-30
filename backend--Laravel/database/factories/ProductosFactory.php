@@ -23,6 +23,8 @@ class ProductosFactory extends Factory
             'stock' => fake()->randomNumber(2, false),
             'image' => false,
             'categoria' => fake()->numberBetween(0,7),
+            'id_usuario' => 1,
+            'comprador' => 0
         ];
     }
 }

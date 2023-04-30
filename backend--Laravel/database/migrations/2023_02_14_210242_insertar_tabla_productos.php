@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('categoria');
             $table->boolean('image');
+            $table->integer('id_usuario');
+            $table->integer('comprador')->nullable();
             $table->timestamps();
         });
     }

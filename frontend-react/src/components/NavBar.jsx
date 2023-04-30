@@ -17,7 +17,7 @@ export default function ResponsiveAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
 
-  const {isLogged, logout} = useUser();
+  const {isLogged, logout, userData} = useUser();
   const pages = ['INICIO', 'TIENDA', 'CONTACTO'];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,7 +44,7 @@ export default function ResponsiveAppBar() {
   }
   const handleClosPerfil = () => {
     handleClose();
-    navigate('/user');
+    navigate('/user/' + userData.id);
   }
 
   return (

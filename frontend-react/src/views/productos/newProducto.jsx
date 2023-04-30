@@ -14,6 +14,8 @@ import { InputLabel, FormControl } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import useProductos from '../../hooks/useProductos';
+import useUser from '../../hooks/useUser';
+import { useEffect } from 'react';
 
 const fileToB64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -30,11 +32,20 @@ const fileToB64 = (file) => {
   });
 };
 
+
 export default function NewProducto() {
+
+  const { fetchUserData, userData } = useUser();
+
+  useEffect(() => { // On init
+    fetchUserData();
+  }, []);
+
   let { state } = useLocation();
 
   if (state === null) {
     state = {
+      id_usuario: userData.id,
       categoria: 0,
       precio: 1,
       nombre: '',
@@ -52,7 +63,8 @@ export default function NewProducto() {
     nombre: state.nombre,
     descripcion: state.descripcion,
     stock: state.stock,
-    image: null
+    image: null,
+    id_usuario: userData.id,
   });
 
   const setFormState = (o) => setFormState_({ ...formState, ...o });
@@ -68,6 +80,7 @@ export default function NewProducto() {
 
   const handleForm = (e) => {
     e.preventDefault();
+    console.log(formState, state.id);
     putProducto(formState, state.id);
   }
 

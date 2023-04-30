@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -26,7 +27,8 @@ class AuthController extends Controller
             'lastname' => $request->lastname,
             'password' => bcrypt($request->password),
             'email' => $request->email,
-            'rol' => 'usuario'
+            'rol' => 'usuario',
+            'valoracion' => 0
         ]);
 
         $token = JWTAuth::fromUser($user);
@@ -62,7 +64,12 @@ class AuthController extends Controller
     }
 
     public function user(Request $request) {
-
         return response()->json(auth()->user());
+    }
+
+    public function userData(Request $request){
+        $data = User::find($request->id);
+        $productos = Productos::where("id_usuario", "=", $data->id)->get();
+        return response()->json(["user" => $data, "productos" => $productos]);
     }
 }

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('user', [AuthController::class, 'user']);
+Route::get('userData/{id}', [AuthController::class, 'userData']);
 Route::apiResource('productos', ProductosController::class);
 Route::post('/productFilters', [ProductosController::class, 'productListFilter']);
 Route::get('/productImage/{id}', [ProductosController::class, 'image']);

@@ -23,3 +23,7 @@ export function destroyProducto(id) {
 export function filterProductos(filter, page) {
     return api('post', '/productFilters' + '?page=' + page, filter);
 }
+
+export function productosDeUsuario(page) {
+    return api('post', '/productUser' + '?page=' + page);
+}

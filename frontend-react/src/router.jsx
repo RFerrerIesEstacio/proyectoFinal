@@ -47,7 +47,7 @@ const router = createBrowserRouter([
                 element: <IsNotAuth><NewProducto/></IsNotAuth>
             },
             {
-                path: "/user",
+                path: "/user/:id",
                 element: <IsNotAuth><Usuario/></IsNotAuth>
             },
             {
