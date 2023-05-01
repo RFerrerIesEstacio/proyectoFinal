@@ -1,6 +1,5 @@
 import React from 'react';
 import { UserContextProvider } from './context/userContext';
-import { ModalContextProvider } from './context/modalContext';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import router from './router';
@@ -8,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import axios from 'axios';
 import './styles/styles.css';
+import { ModalContextProvider } from "./context/modalContext";
 
 axios.defaults.baseURL = window.location.origin + "/api/";
 

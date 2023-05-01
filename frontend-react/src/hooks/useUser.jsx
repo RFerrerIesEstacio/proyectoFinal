@@ -12,14 +12,19 @@ export default function useUser() {
   const { setJWT, isLogged, setLogged, userData, setUserData, setAuthBarer } = useContext(Context)
   const navigate = (a) => {};
   const login = (data) => {
-    return auth.login(data).then((data) => {
-      setLogged(true);
-      setJWT(data.token);
-      setAuthBarer(data.token);
-      fetchUserData().then(() => navigate('/inicio/'));
-    })
-    .catch((e) => {
-      setErrors(e.errors ?? {});
+    return new Promise((res, rej) => {
+      auth.login(data).then((data) => {
+        console.log(setLogged);
+        setLogged(true);
+        setJWT(data.token);
+        setAuthBarer(data.token);
+        fetchUserData().then(() => res());
+      })
+      .catch((e) => {
+        setErrors(e.errors ?? {});
+        console.log(e);
+        rej();
+      });
     });
   };
 

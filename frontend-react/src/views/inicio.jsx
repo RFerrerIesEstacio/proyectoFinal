@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import  useUser from '../hooks/useUser';
 import Carousel from 'react-material-ui-carousel';
 import LogIn from './Auth/login';
-import useModal from '../hooks/useModal';
-
+import useModal from "../hooks/useModal";
 
 
 
@@ -68,19 +67,13 @@ const ImageInicio = (props) => {
 };
 
 
-
 // PC UNIT
 
 export default function Inicio() {
 
   const {isLogged, fetchUserData} = useUser();  
   const navigate = useNavigate();
-
-  const modal = useModal();
-
-  function openModal() {
-    modal(LogIn);
-  }
+  const openCustomModal = useModal();
 
   return (
     <>
@@ -90,8 +83,7 @@ export default function Inicio() {
         <ImageInicio src={'https://wallpaperaccess.com/full/1912279.jpg'}></ImageInicio>
       </Carousel>
 
-      <h1 onClick={openModal}>¿Quienes somos?</h1>
-      <p></p>
+      <h1>¿Quienes somos?</h1>
     </>
     
   );

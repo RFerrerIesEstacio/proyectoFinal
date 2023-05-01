@@ -24,10 +24,10 @@ export function ModalContextProvider({ children }) {
   const [Component, setComponent] = useState(forwardRef(() => <div></div>));
 
   const openCustomModal = useCallback((C, props) => {
-    onClose = () => {
+    onClose = (...args) => {
       setOpened(false);
       if (props && props.onClose) {
-        props.onClose();
+        props.onClose(...args);
       }
     }
     setComponent(forwardRef(() => <C {...props} close={onClose} />));

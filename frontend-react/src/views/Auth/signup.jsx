@@ -11,6 +11,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import useUser from '../../hooks/useUser';
 import { Link } from 'react-router-dom';
+import useModal from '../../hooks/useModal';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from '../../theme';
+import LogIn from './login';
 
 
 
@@ -31,14 +35,17 @@ export default function SignUp() {
     register(newUser);
   };
 
+  const openCustomModal = useModal();
+
 
   return (
-      <>
+    <ThemeProvider theme={theme}>
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            width: 500
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
@@ -121,13 +128,13 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2" style={{color: "black"}}>
-                  Already have an account? Sign in
-                </Link>
+                <div onClick={() => openCustomModal(LogIn)} to="/signup" variant="body2" style={{ color: "black", textDecoration: 'underline', cursor: 'pointer' }}>
+                  {"Already have an account? Sign in"}
+                </div>
               </Grid>
             </Grid>
           </Box>
         </Box>
-      </>
+      </ThemeProvider>
   );
 }

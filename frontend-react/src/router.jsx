@@ -31,14 +31,6 @@ const router = createBrowserRouter([
                 element: <IsNotAuth><Shop/></IsNotAuth>
             },
             {
-                path: "/signup",
-                element: <IsAuth><SignUp/></IsAuth>
-            },
-            {
-                path: "/login",
-                element: <IsAuth><LogIn/></IsAuth>
-            },
-            {
                 path: "/contacto",
                 element: <IsNotAuth><Contacto/></IsNotAuth>
             },

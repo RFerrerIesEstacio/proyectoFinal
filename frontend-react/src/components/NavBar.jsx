@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -12,17 +12,22 @@ import Menu from '@mui/material/Menu';
 import ComputerIcon from '@mui/icons-material/Computer';
 import Button from '@mui/material/Button';
 import useUser from '../hooks/useUser';
+import useModal from '../hooks/useModal';
+import LogIn from '../views/Auth/login';
 
 export default function ResponsiveAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
 
-  const {isLogged, logout, userData} = useUser();
+  const { isLogged, logout, userData } = useUser();
   const pages = ['INICIO', 'TIENDA', 'CONTACTO'];
+
+  const openCustomModal = useModal();
+  const userHook = useUser();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,6 +50,25 @@ export default function ResponsiveAppBar() {
   const handleClosPerfil = () => {
     handleClose();
     navigate('/user/' + userData.id);
+  }
+
+  function login(page) {
+    openCustomModal(LogIn, {
+      onClose: (logged) => {
+        if (logged) {
+          navigate('/' + page);
+        }
+      },
+      userHook
+    });
+  }
+
+  function navigateTo(page) {
+    if (isLogged) {
+      navigate('/' + page);
+    } else {
+      login(page);
+    }
   }
 
   return (
@@ -73,9 +97,9 @@ export default function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to={page.toLowerCase()} style={{ textDecoration: 'none', color: 'white'}}>
-                        <Typography textAlign="center">{page}</Typography>
-                </Link>
+                <div onClick={() => navigateTo(page.toLowerCase())} style={{ textDecoration: 'none', color: 'white' }}>
+                  <Typography textAlign="center">{page}</Typography>
+                </div>
               </Button>
             ))}
           </Box>
@@ -85,14 +109,14 @@ export default function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
             >
-                <MenuIcon />
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -114,9 +138,9 @@ export default function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Link to={page} style={{color: "black", textDecoration: 'none'}}>
-                        <Typography  textAlign="center">{page}</Typography>
-                    </Link>
+                  <div onClick={() => navigateTo(page.toLowerCase())} style={{ color: "black", textDecoration: 'none' }}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </div>
                 </MenuItem>
               ))}
             </Menu>
@@ -130,7 +154,7 @@ export default function ResponsiveAppBar() {
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
-                style={{ width: '7.9rem', display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}
+                style={{ width: '7.9rem', display: 'flex', alignItems: 'flex-end', flexDirection: 'column' }}
 
               >
                 <AccountCircle />
@@ -157,10 +181,10 @@ export default function ResponsiveAppBar() {
           )}
 
           {!isLogged && (
-            <Link to="/login" style={{ textDecoration: 'none' , width: '7.5rem', display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}>
-                <Button variant="outlined" color='secondary'>Log In</Button>
-            </Link>
-            
+            <div style={{ textDecoration: 'none', width: '7.5rem', display: 'flex', alignItems: 'flex-end', flexDirection: 'column' }}>
+              <Button onClick={() => login('')} variant="outlined" color='secondary'>Log In</Button>
+            </div>
+
           )}
         </Toolbar>
       </AppBar>

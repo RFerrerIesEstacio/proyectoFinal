@@ -2,27 +2,9 @@ import { Outlet } from "react-router-dom";
 import {  CssBaseline, Grid, Toolbar, Container} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ResponsiveAppBar from './NavBar';
-
-const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#212121',
-      },
-      secondary: {
-        main: '#FFFFFF',
-      },
-    },
-});
-
+import { theme } from '../theme';
 
 export default function Layout() {
-  const outletStyle = {
-    display: 'flex',
-    flexGrow: 1,
-    color: 'black',
-    flexDirection: 'column'
-  };
-
   return (
       <>
         <ThemeProvider theme={theme}>
