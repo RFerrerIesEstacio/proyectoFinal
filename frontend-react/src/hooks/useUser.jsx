@@ -14,7 +14,6 @@ export default function useUser() {
   const login = (data) => {
     return new Promise((res, rej) => {
       auth.login(data).then((data) => {
-        console.log(setLogged);
         setLogged(true);
         setJWT(data.token);
         setAuthBarer(data.token);
@@ -22,7 +21,6 @@ export default function useUser() {
       })
       .catch((e) => {
         setErrors(e.errors ?? {});
-        console.log(e);
         rej();
       });
     });
@@ -42,15 +40,18 @@ export default function useUser() {
   }
 
   const register = (data) => {
-    return auth.register(data).then(({ token }) => {
-      setLogged(true);
-      setJWT(token);
-      setAuthBarer(token);
-      fetchUserData().then(() => navigate('/inicio/'));
-    })
+    return new Promise((res, rej) => {
+      auth.register(data).then(({ token }) => {
+        setLogged(true);
+        setJWT(token);
+        setAuthBarer(token);
+        fetchUserData().then(() => res());
+      })
       .catch((e) => {
         setErrors(e.errors ?? {});
+        rej();
       })
+    });
   }
 
   const getUserData = (id) => {

@@ -11,15 +11,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import useUser from '../../hooks/useUser';
 import { Link } from 'react-router-dom';
-import useModal from '../../hooks/useModal';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '../../theme';
+import { modalStyle, theme } from '../../theme';
 import LogIn from './login';
+import { Modal } from '@mui/material';
 
 
 
 
-export default function SignUp() {
+export default function SignUp({open, onClose}) {
 
   const [name, setName] = useState();
   const [lastname, setLastname] = useState();
@@ -32,21 +32,19 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newUser = {name, lastname, email, password, marketing};
-    register(newUser);
-  };
+    register(newUser).then(() => {
+      onClose('signup')
+    })
+    .catch(() => {
 
-  const openCustomModal = useModal();
+    });
+  };
 
 
   return (
-    <ThemeProvider theme={theme}>
+    <Modal open={open} onClose={onClose}>
         <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: 500
-          }}
+          sx={modalStyle}
         >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
@@ -128,13 +126,13 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <div onClick={() => openCustomModal(LogIn)} to="/signup" variant="body2" style={{ color: "black", textDecoration: 'underline', cursor: 'pointer' }}>
+                <div onClick={() => onClose('openLogin')} to="/signup" variant="body2" style={{ color: "black", textDecoration: 'underline', cursor: 'pointer' }}>
                   {"Already have an account? Sign in"}
                 </div>
               </Grid>
             </Grid>
           </Box>
         </Box>
-      </ThemeProvider>
+      </Modal>
   );
 }

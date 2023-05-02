@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,20 +11,22 @@ import Menu from '@mui/material/Menu';
 import ComputerIcon from '@mui/icons-material/Computer';
 import Button from '@mui/material/Button';
 import useUser from '../hooks/useUser';
-import useModal from '../hooks/useModal';
 import LogIn from '../views/Auth/login';
+import SignUp from '../views/Auth/signup';
+import { Modal } from '@mui/material';
+import { useState } from 'react';
 
 export default function ResponsiveAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   const { isLogged, logout, userData } = useUser();
   const pages = ['INICIO', 'TIENDA', 'CONTACTO'];
 
-  const openCustomModal = useModal();
   const userHook = useUser();
+  const [wantsNavigate, setWantsNavigate] = useState('/');
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
 
   const handleOpenNavMenu = (event) => {
@@ -52,27 +53,53 @@ export default function ResponsiveAppBar() {
     navigate('/user/' + userData.id);
   }
 
-  function login(page) {
-    openCustomModal(LogIn, {
-      onClose: (logged) => {
-        if (logged) {
-          navigate('/' + page);
-        }
-      },
-      userHook
-    });
-  }
+  const [loginOpened, setLoginOpened] = useState(false);
+  const [signupOpened, setSignupOpened] = useState(false);
 
   function navigateTo(page) {
     if (isLogged) {
       navigate('/' + page);
     } else {
-      login(page);
+      setWantsNavigate(page);
+      setLoginOpened(true);
     }
   }
 
+  
+
   return (
     <Box>
+      <LogIn 
+        open={loginOpened}
+        onClose={(c) => {
+          setLoginOpened(false);
+          switch (c) {
+            case 'openSignup':
+              setSignupOpened(true);
+              break;
+            case 'logged':
+              navigate('/' + wantsNavigate);
+              break;
+          }
+        }}
+      ></LogIn>
+      <SignUp
+        open={signupOpened}
+        onClose={(c) => {
+          setSignupOpened(false);
+          switch (c) {
+            case 'openLogin':
+              setLoginOpened(true);
+              break;
+            case 'signup':
+              navigate('/' + wantsNavigate);
+              break;
+          }
+        }}
+      >
+        
+      </SignUp>
+      
       <AppBar position="static">
         <Toolbar>
           <ComputerIcon
@@ -182,7 +209,7 @@ export default function ResponsiveAppBar() {
 
           {!isLogged && (
             <div style={{ textDecoration: 'none', width: '7.5rem', display: 'flex', alignItems: 'flex-end', flexDirection: 'column' }}>
-              <Button onClick={() => login('')} variant="outlined" color='secondary'>Log In</Button>
+              <Button onClick={() => setLoginOpened(true)} variant="outlined" color='secondary'>Log In</Button>
             </div>
 
           )}

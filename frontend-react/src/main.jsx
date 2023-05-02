@@ -7,18 +7,15 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import axios from 'axios';
 import './styles/styles.css';
-import { ModalContextProvider } from "./context/modalContext";
 
 axios.defaults.baseURL = window.location.origin + "/api/";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ModalContextProvider>
-      <UserContextProvider>
-        <RouterProvider router={router}/>
-      </UserContextProvider>
-    </ModalContextProvider>
+    <UserContextProvider>
+      <RouterProvider router={router}/>
+    </UserContextProvider>
   </React.StrictMode>
 );
 

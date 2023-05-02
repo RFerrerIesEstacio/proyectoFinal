@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import  useUser from '../hooks/useUser';
 import Carousel from 'react-material-ui-carousel';
 import LogIn from './Auth/login';
-import useModal from "../hooks/useModal";
 
 
 
@@ -73,7 +72,6 @@ export default function Inicio() {
 
   const {isLogged, fetchUserData} = useUser();  
   const navigate = useNavigate();
-  const openCustomModal = useModal();
 
   return (
     <>
