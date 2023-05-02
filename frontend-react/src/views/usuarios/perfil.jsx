@@ -18,9 +18,9 @@ import { useParams } from "react-router-dom";
 export default function Usuario() {
   const { id } = useParams();
   const { fetchUserData, userData, getUserData, userProfile } = useUser();
-  const {getList, listaProductos, removeItem, editItem, length, setLength, filterProductos} = useProductos();
+  const {getList, listaProductos, setListaProductos, removeItem, editItem, length, setLength, filterProductos} = useProductos();
   useEffect(() => { // On init
-    getUserData(id);
+    getUserData(id).then(setListaProductos(userProfile.productos));
   }, []);
 
   const isMe = userProfile?.user?.id == userData?.id;
@@ -31,7 +31,7 @@ export default function Usuario() {
         <AccountCircle style={{ fontSize: '6rem' }} />
         <Typography variant="h3" color="primary.main" style={{display: 'flex', alignItems: 'center', marginLeft:'1rem'}}> Usuario⠀ <b><u>{userProfile.user.name}</u></b></Typography>
         <div style={{ display: 'flex'}}>
-          {isMe && <Button variant="outlined" color='primary' style={{backgroundColor: 'white', margin: '1rem', justifyContent:'flex-end'}}>Editar Perfil</Button>}
+          {/* {isMe && <Button variant="outlined" color='primary' style={{backgroundColor: 'white', margin: '1rem', justifyContent:'flex-end'}}>Editar Perfil</Button>} */}
               
         </div>
       </div>

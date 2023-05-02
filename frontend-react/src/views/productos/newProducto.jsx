@@ -36,7 +36,7 @@ const fileToB64 = (file) => {
 export default function NewProducto() {
 
   const { fetchUserData, userData } = useUser();
-
+  console.log("ENtra")
   useEffect(() => { // On init
     fetchUserData();
   }, []);

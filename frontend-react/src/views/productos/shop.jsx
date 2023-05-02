@@ -14,6 +14,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import useUser from "../../hooks/useUser"
 import useProductos from "../../hooks/useProductos"
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -34,6 +35,7 @@ export default function Shop() {
   const [search, setSearch] = useState();
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(1000);
+  const navigate = useNavigate();
 
 
   React.useEffect(() => { // On init
@@ -74,9 +76,6 @@ export default function Shop() {
           md={{width: '40rem'}}
           lg={{width: '60rem'}}
           >
-          <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
-            <Button variant="outlined" color='primary' onClick={() => editItem('')} style={{backgroundColor: 'white', margin: '1rem'}}>Añadir Producto</Button>
-          </div>
           
           <Typography
             component="h1"
@@ -176,13 +175,7 @@ export default function Shop() {
                   </CardContent>
                   <CardActions>
                     <Button size="small" disabled>Comprar</Button>
-                    {( userData.rol === 'admin') && 
-                      <>
-                        <Button size="small" onClick={() => editItem(card.id)}>Edit</Button>
-                        <Button size="small" onClick={() => removeItem(card.id) && setPage(1)}>Delete</Button>
-                      </>
-                    }
-                    
+                    <Button size='small' onClick={() => navigate('/user/' + card.id_usuario)}>Perfil</Button>                   
                   </CardActions>
                 </Card>
               </Grid>

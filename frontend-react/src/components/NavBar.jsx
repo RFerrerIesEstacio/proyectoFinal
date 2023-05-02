@@ -102,16 +102,9 @@ export default function ResponsiveAppBar() {
       
       <AppBar position="static">
         <Toolbar>
-          <ComputerIcon
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </ComputerIcon>
+          <img src="/images/LogoSinLetra.png" height={30} style={{marginRight: 10}} />
           <Typography variant="h6">
-            Online Shop
+            PC UNIT
           </Typography>
 
 
