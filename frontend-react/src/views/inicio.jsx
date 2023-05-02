@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import  useUser from '../hooks/useUser';
 import Carousel from 'react-material-ui-carousel';
 import LogIn from './Auth/login';
-
+import Footer from '../components/Footer';
+import { Grid } from '@mui/material';
 
 
 const MainTitle = (props) => {
@@ -72,9 +73,31 @@ export default function Inicio() {
         <ImageInicio src={'https://wallpaperaccess.com/full/1912279.jpg'}></ImageInicio>
       </Carousel>
 
-      <Container style={{marginTop: "50px"}} sx={{border:"1px solid black", height:"400px"}}>
-        <Typography variant="h3">Quienes somos?</Typography>
+      <Container style={{marginTop: "50px"}} sx={{maxHeight: 800, textAlign: 'center'}}>
+        <Typography variant="h3" sx={{fontWeight: 'bold'}}>¿Quienes somos?</Typography>
+        <p style={{textAlign: 'justify'}}>Somos una empresa dedicada exclusivamente a ofrecer un servicio de venta online de productos
+          informáticos. En este entorno web podrás navegar y encontrar productos de otros usuarios que puedan
+          interesarte al igual que podrás publicar tus propios productos para vender.
+        </p>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4}>
+            <Container>
+              Máxima seguridad
+            </Container>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Container>
+              Máxima seguridad
+            </Container>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Container>
+              Valora los productos comprados para obtener ofertas exclusivas
+            </Container>
+          </Grid>
+        </Grid>
       </Container>
+      <Footer />
     </div>
     
   );
