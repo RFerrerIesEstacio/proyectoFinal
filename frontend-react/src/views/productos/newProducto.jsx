@@ -16,6 +16,7 @@ import AddIcon from '@mui/icons-material/Add';
 import useProductos from '../../hooks/useProductos';
 import useUser from '../../hooks/useUser';
 import { useEffect } from 'react';
+import Footer from '../../components/Footer';
 
 const fileToB64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -31,7 +32,6 @@ const fileToB64 = (file) => {
     };
   });
 };
-
 
 export default function NewProducto() {
 
@@ -92,7 +92,9 @@ export default function NewProducto() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          margin: 'auto'
+          justifyContent: 'center',
+          marginX: 'auto',
+          marginY: '80px'
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
@@ -208,7 +210,7 @@ export default function NewProducto() {
                 type="submit"
                 variant="contained"
                 fullWidth
-                onClick={() => navigate('/tienda')}
+                onClick={() => navigate('/user/' + userData.id)}
               >
                 Cancelar
               </Button>
@@ -227,6 +229,7 @@ export default function NewProducto() {
           </Grid>
         </Box>
       </Box>
+      <Footer/>
     </>
   )
 }

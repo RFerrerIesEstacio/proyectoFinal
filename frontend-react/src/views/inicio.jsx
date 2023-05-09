@@ -13,6 +13,7 @@ import Footer from '../components/Footer';
 import { Grid } from '@mui/material';
 
 
+
 const MainTitle = (props) => {
   const style = {
     position: 'absolute',
@@ -73,27 +74,31 @@ export default function Inicio() {
         <ImageInicio src={'https://wallpaperaccess.com/full/1912279.jpg'}></ImageInicio>
       </Carousel>
 
-      <Container style={{marginTop: "50px"}} sx={{maxHeight: 800, textAlign: 'center'}}>
+      <Container style={{marginTop: "50px"}} sx={{maxHeight: 800, textAlign: 'center', marginBottom: 15}}>
         <Typography variant="h3" sx={{fontWeight: 'bold'}}>¿Quienes somos?</Typography>
-        <p style={{textAlign: 'justify'}}>Somos una empresa dedicada exclusivamente a ofrecer un servicio de venta online de productos
+        <p style={{textAlign: 'justify', marginBottom:'30px'}}>Somos una empresa dedicada exclusivamente a ofrecer un servicio de venta online de productos
           informáticos. En este entorno web podrás navegar y encontrar productos de otros usuarios que puedan
-          interesarte al igual que podrás publicar tus propios productos para vender.
+          interesarte al igual que podrás publicar tus propios productos para vender. Desde nuestra página web, te vamos a ofrecer un servicio con fácil de usar y con
+          la mejor calidad posible. 
         </p>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <Container>
               Máxima seguridad
             </Container>
+            <img src="images/seguridad.png" height={100} style={{ marginTop: 40}}/>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Container>
-              Máxima seguridad
+              Diseño fácil de utilizar, sencillo y multiplataforma
             </Container>
+            <img src="images/diseño.png" height={100} style={{ marginTop: 10}}/>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Container>
               Valora los productos comprados para obtener ofertas exclusivas
             </Container>
+            <img src="images/valoraciones.png" height={100} style={{ marginTop: 10}}/>
           </Grid>
         </Grid>
       </Container>
