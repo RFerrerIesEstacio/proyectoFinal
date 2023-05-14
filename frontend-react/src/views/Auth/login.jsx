@@ -37,7 +37,7 @@ export default function LogIn({ open, onClose }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Inicio de Sesión
         </Typography>
         {(errors.credentials && (<Alert severity="error">{errors.credentials}</Alert>))}
 
@@ -61,7 +61,7 @@ export default function LogIn({ open, onClose }) {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -77,7 +77,7 @@ export default function LogIn({ open, onClose }) {
           </Button>
           <Grid container sx={{ justifyContent: 'flex-end' }}>
             <div onClick={() => onClose('openSignup')} to="/signup" variant="body2" style={{ color: "black", textDecoration: 'underline', cursor: 'pointer' }}>
-              {"Don't have an account? Sign Up"}
+              {"¿No tienes una cuenta? Regístrate"}
             </div>
           </Grid>
         </Box>

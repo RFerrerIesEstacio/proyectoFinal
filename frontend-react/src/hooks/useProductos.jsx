@@ -35,6 +35,7 @@ export default function useProductos() {
       navigate('/newProducto');
     }
     else {
+      // setListaProductos(userData.listaProductos);
       const producto = listaProductos.filter(($producto) => $producto.id === id);
       navigate('/newProducto', { state: producto[0] });
     }

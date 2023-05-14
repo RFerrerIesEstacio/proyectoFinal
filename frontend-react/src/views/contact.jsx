@@ -81,7 +81,7 @@ export default function Contacto() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
                   autoFocus
