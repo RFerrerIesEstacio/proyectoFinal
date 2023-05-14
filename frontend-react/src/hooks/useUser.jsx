@@ -55,9 +55,12 @@ export default function useUser() {
   }
 
   const getUserData = (id) => {
-    return usuario.getUserProfile(id).then((data) => {
-      setUserProfile(data);
-    }).catch((e) => console.log(e));
+    return new Promise((res, rej) => {
+      usuario.getUserProfile(id).then((data) => {
+        setUserProfile(data);
+        res(data);
+      }).catch((e) => rej(e));
+    });
   }
   return {
     logout,

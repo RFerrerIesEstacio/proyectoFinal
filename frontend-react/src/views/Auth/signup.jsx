@@ -50,7 +50,7 @@ export default function SignUp({open, onClose}) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Regístrate
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -63,7 +63,7 @@ export default function SignUp({open, onClose}) {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label="Nombre"
                   autoFocus
                   {...(errors.name && {error: true, helperText: errors.name[0]})}
                 />
@@ -75,7 +75,7 @@ export default function SignUp({open, onClose}) {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label="Apellidos"
                   name="lastName"
                   autoComplete="family-name"
                   {...(errors.lastname && {error: true, helperText: errors.lastname[0]})}
@@ -88,7 +88,7 @@ export default function SignUp({open, onClose}) {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
                   {...(errors.email && {error: true, helperText: errors.email[0]})}
@@ -101,7 +101,7 @@ export default function SignUp({open, onClose}) {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Contraseña"
                   type="password"
                   id="password"
                   {...(errors.password && {error: true, helperText: errors.password[0]})}
@@ -127,7 +127,7 @@ export default function SignUp({open, onClose}) {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <div onClick={() => onClose('openLogin')} to="/signup" variant="body2" style={{ color: "black", textDecoration: 'underline', cursor: 'pointer' }}>
-                  {"Already have an account? Sign in"}
+                  {"¿Ya tienes una cuenta? Inicia Sesión"}
                 </div>
               </Grid>
             </Grid>

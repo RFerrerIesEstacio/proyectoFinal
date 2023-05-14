@@ -57,7 +57,7 @@ export default function ResponsiveAppBar() {
   const [signupOpened, setSignupOpened] = useState(false);
 
   function navigateTo(page) {
-    if (isLogged) {
+    if (isLogged || page === "inicio") {
       navigate('/' + page);
     } else {
       setWantsNavigate(page);

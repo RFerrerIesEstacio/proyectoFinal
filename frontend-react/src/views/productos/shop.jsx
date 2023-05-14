@@ -15,6 +15,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import useUser from "../../hooks/useUser"
 import useProductos from "../../hooks/useProductos"
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer';
 
 
 
@@ -181,8 +182,9 @@ export default function Shop() {
               </Grid>
             ))}
         </Grid>
-        <Pagination sx={{mt: 3}} count={length} onChange={pagination} page={page} style={{backgroundColor: 'white', padding: '1rem', borderRadius: '10px', border: '2px solid black' }} variant="outlined" shape="rounded"/>
+        <Pagination sx={{mt: 3}} count={length} onChange={pagination} page={page} style={{ padding: '2rem'}} variant="outlined" shape="rounded"/>
       </Container>
-      </>
+      <Footer/>
+    </>
   );
 }
