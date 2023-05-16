@@ -7,3 +7,7 @@ export function getUser() {
 export function getUserProfile(id){
     return api('get', '/userData/' + id);
 }
+
+export function userPay(amount){
+    return api('get', '/usuario/charge/' + amount);
+}

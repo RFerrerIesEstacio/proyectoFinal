@@ -19,7 +19,7 @@ import { UserContextProvider } from "../../context/userContext";
 
 export default function Usuario() {
   const { id } = useParams();
-  const { fetchUserData, userData, getUserData, userProfile } = useUser();
+  const { fetchUserData, userData, getUserData, userProfile, pay } = useUser();
   const {getList, listaProductos, setListaProductos, removeItem, editItem, length, setLength, filterProductos} = useProductos();
   useEffect(() => { // On init
     getUserData(id).then((x) => {
@@ -106,7 +106,7 @@ export default function Usuario() {
                       {
                         ( !isMe ) &&
                         <>
-                          <Button size="small" disabled onClick={() => editItem(card.id)}>Comprar</Button>
+                          <Button size="small" onClick={() => pay(card.precio)}>Comprar</Button>
                         </>
                       }
                       

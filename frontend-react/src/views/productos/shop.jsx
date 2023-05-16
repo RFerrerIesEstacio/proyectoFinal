@@ -16,6 +16,7 @@ import useUser from "../../hooks/useUser"
 import useProductos from "../../hooks/useProductos"
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import { userPay } from '../../services/usuario';
 
 
 
@@ -32,7 +33,7 @@ export default function Shop() {
 
   const {getList, listaProductos, removeItem, editItem, length, setLength, filterProductos} = useProductos();
   const [page, setPage] = React.useState(1);
-  const { fetchUserData, userData } = useUser();
+  const { fetchUserData, userData, pay } = useUser();
   const [search, setSearch] = useState();
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(1000);
@@ -175,7 +176,7 @@ export default function Shop() {
                     
                   </CardContent>
                   <CardActions>
-                    <Button size="small" disabled>Comprar</Button>
+                    <Button size="small" onClick={() => pay(card.precio)}>Comprar</Button>
                     <Button size='small' onClick={() => navigate('/user/' + card.id_usuario)}>Perfil</Button>                   
                   </CardActions>
                 </Card>

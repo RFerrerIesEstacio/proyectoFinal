@@ -33,6 +33,12 @@ export default function useUser() {
     navigate('/login');
   };
 
+
+  const pay = (amount) => {
+    return usuario.userPay(amount).then(({payment_url}) => {
+      window.location = payment_url;
+    }).catch((e) => console.log(e));
+  }
   const fetchUserData = () => {
     return usuario.getUser().then((data) => {
       setUserData(data);
@@ -74,6 +80,7 @@ export default function useUser() {
     setUserData,
     getUserData,
     userProfile, 
-    setUserProfile
+    setUserProfile,
+    pay
   }
 }
