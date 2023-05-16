@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,5 @@ Route::apiResource('productos', ProductosController::class);
 Route::post('/productFilters', [ProductosController::class, 'productListFilter']);
 Route::get('/productImage/{id}', [ProductosController::class, 'image']);
 Route::post('/contact', [ConsultasController::class, 'store']);
+Route::apiResource('/usuario', UserController::class);
+Route::get('/usuario/charge/{amount}', [UserController::class, 'charge']);

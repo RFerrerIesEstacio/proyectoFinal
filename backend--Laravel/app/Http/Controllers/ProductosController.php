@@ -126,6 +126,10 @@ class ProductosController extends Controller
 
     }
 
+    public function buy($id) {
+
+    }
+
     public function checkAuth($pid) {
         $product = Productos::find($pid);
         $userId = $product->id_usuario;
