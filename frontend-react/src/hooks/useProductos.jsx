@@ -43,16 +43,15 @@ export default function useProductos() {
 
   function putProducto(producto, id) {
     if (id !== '') {
-      console.log(producto)
       productos.editProducto(producto, id).
-        then((data) => navigate('/tienda')).
+        then(navigate('/user/' + JSON.parse(localStorage.getItem('user')).userData.id)).
         catch((e) => {
           setProductErrors(e.errors ?? {})
         });
     }
     else {
       productos.newProducto(producto).
-        then((data) => navigate('/tienda')).
+        then((data) => navigate('/user/' + JSON.parse(localStorage.getItem('user')).userData.id)).
         catch((e) => setProductErrors(e.errors ?? {}));
     }
   }

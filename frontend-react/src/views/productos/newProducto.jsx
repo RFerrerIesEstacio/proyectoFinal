@@ -36,7 +36,6 @@ const fileToB64 = (file) => {
 export default function NewProducto() {
 
   const { fetchUserData, userData } = useUser();
-  console.log("ENtra")
   useEffect(() => { // On init
     fetchUserData();
   }, []);
@@ -80,7 +79,6 @@ export default function NewProducto() {
 
   const handleForm = (e) => {
     e.preventDefault();
-    console.log(formState, state.id);
     putProducto(formState, state.id);
   }
 
